@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, Image, chakra } from "@chakra-ui/react";
 import debounce from "lodash/debounce";
 import Header from "../components/Header";
 import Search from "../components/Search";
@@ -85,6 +85,7 @@ export default function Home() {
           const countries = jsonResponse.slice(0, 10);
           setCountries(countries);
           setLoading(false);
+          console.log(countries);
           initialData.current = countries;
         })
         .catch((error) => {
@@ -166,21 +167,62 @@ export default function Home() {
         flexDir="column"
         w="100vw"
         minH="100vh"
+        alignItems="center"
         backgroundColor="hsl(0, 0%, 98%)"
       >
         <Header />
         <Search searchState={search} onSearchChange={changeSearch} />
         <Filter filterState={filter} onFilterChange={changeFilter} />
         {countries.map((country) => (
-          <Flex key={country.name} flexDirection="column" p={5} w="100%">
-            <Text>
+          <Flex
+            key={country.name}
+            flexDirection="column"
+            p={5}
+            textAlign="left"
+            w="80%"
+            shadow="md"
+            borderRadius="md"
+            my={5}
+          >
+            <Image w="100%" h="50%" src={country.flag} alt="" />
+            <Text
+              color="hsl(200, 15%, 8%)"
+              fontWeight="extrabold"
+              pt={4}
+              fontSize="xl"
+              w="100%"
+            >
               {country.name}
-              <br />
-              {country.capital}
-              <br />
-              {country.population}
-              <br />
-              {country.region}
+            </Text>
+            <Text
+              color="hsl(200, 15%, 8%)"
+              fontWeight="semibold"
+              pt={2}
+              fontSize="md"
+              w="100%"
+            >
+              Population:
+              <chakra.span color="gray.700"> {country.population.toLocaleString()}</chakra.span>
+            </Text>
+            <Text
+              color="hsl(200, 15%, 8%)"
+              fontWeight="semibold"
+              pt={2}
+              fontSize="md"
+              w="100%"
+            >
+              Region:
+              <chakra.span color="gray.700"> {country.region}</chakra.span>
+            </Text>
+            <Text
+              color="hsl(200, 15%, 8%)"
+              fontWeight="semibold"
+              pt={2}
+              fontSize="md"
+              w="100%"
+            >
+              Capital:
+              <chakra.span color="gray.700"> {country.capital}</chakra.span>
             </Text>
           </Flex>
         ))}

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -13,6 +13,7 @@
     "@emotion/react": "11",
     "@emotion/styled": "11",
     "@fontsource/nunito-sans": "^4.5.0",
+    "cross-env": "^7.0.3",
     "framer-motion": "4",
     "lodash": "^4.17.21",
     "next": "11.0.1",
